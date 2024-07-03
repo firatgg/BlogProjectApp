@@ -190,6 +190,44 @@ namespace BlogProjectApp.DataAccess.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Articles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            Content = "Visual Studio Net  ortamında C# Net Core ile temel seviyeden (veri türleri,değişkenler,if-else,dögüler,diziler) ileri seviyeye(nesneye daalı programlama -opp,collections,generic collections,interfaces,linq) eğitim programı)",
+                            CreatedDate = new DateTime(2024, 7, 3, 15, 4, 32, 652, DateTimeKind.Local).AddTicks(8759),
+                            IsDeleted = false,
+                            PictureUrl = "/images/7.jpg",
+                            Summary = "Visual Studio Net  ortamında C# Net Core ile temel seviyeden (veri türleri,değişkenler,if-else,dögüler,diziler)",
+                            Title = "C# Net Core Introduction",
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 2,
+                            Content = "Visual studio.Net ortamında entity framework core ırn teknolojisini kullanarak veri tabanı varlılarının nesnel olarak yazılım tarafına atarılamsı ve yönetilmesi",
+                            CreatedDate = new DateTime(2024, 7, 3, 15, 4, 32, 652, DateTimeKind.Local).AddTicks(8761),
+                            IsDeleted = false,
+                            PictureUrl = "/images/6.jpg",
+                            Summary = "Visual studio.Net ortamında entity framework core ırn teknolojisini kullanarak veri tabanı varlılarının nesnel olarak yazılım tarafına atarılamsı ve yönetilmesi...",
+                            Title = "Entity Framework Core ile Orm",
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 3,
+                            Content = "visual studio net ortamında asp.net core mvc ile temel düzeyden ileri seviyeye web programlama eğitimi,asp.net Restfull  APIs...",
+                            CreatedDate = new DateTime(2024, 7, 3, 15, 4, 32, 652, DateTimeKind.Local).AddTicks(8779),
+                            IsDeleted = false,
+                            PictureUrl = "/images/5.jpg",
+                            Summary = "visual studio net ortamında asp.net core mvc ile temel düzeyden ileri seviyeye web programlama eğitimi,asp.net Restfull  APIs",
+                            Title = "Asp Net Core mvc web programlama",
+                            UserId = 1
+                        });
                 });
 
             modelBuilder.Entity("BlogProjectApp.Entity.Entities.Category", b =>
@@ -218,6 +256,32 @@ namespace BlogProjectApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(2024, 7, 3, 15, 4, 32, 652, DateTimeKind.Local).AddTicks(8657),
+                            Description = "C# .Net Introduction",
+                            IsDeleted = false,
+                            Name = "C#.Net Core Programing"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2024, 7, 3, 15, 4, 32, 652, DateTimeKind.Local).AddTicks(8670),
+                            Description = "Entity Framework Core ile ORM Teknolojileri",
+                            IsDeleted = false,
+                            Name = "Entity Framework Core"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedDate = new DateTime(2024, 7, 3, 15, 4, 32, 652, DateTimeKind.Local).AddTicks(8671),
+                            Description = "Asp Net Cıre Mvc ile Web Programcılığı",
+                            IsDeleted = false,
+                            Name = "Asp Net Core MVC"
+                        });
                 });
 
             modelBuilder.Entity("BlogProjectApp.Entity.Entities.Comment", b =>
