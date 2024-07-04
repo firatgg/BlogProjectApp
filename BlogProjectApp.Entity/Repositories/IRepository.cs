@@ -11,6 +11,8 @@ namespace BlogProjectApp.Entity.Repositories
 	{
 		//List<T> GetAll();
 
+		Task<IEnumerable<T>> GetAll(Expression<Func<T, bool>> filter=null, 
+			Func<IQueryable<T>, IOrderedQueryable<T>> orderby=null, params Expression<Func<T, object>>[] includes );
 		Task<IEnumerable<T>> GetAllAsync();
 		Task<T> GetByIdAsync(int id);
 		Task<T> Get(Expression<Func<T, bool>> filter);

@@ -1,5 +1,4 @@
-﻿
-@model List<CategoryViewModel>
+﻿@model List<CategoryViewModel>
 
 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 	<a class="dropdown-item" href="/Article/Index">Tüm Blog Yazıları</a>
@@ -9,8 +8,6 @@
 		<a class="dropdown-item" asp-action="Index" asp-controller="Article" asp-route-id="@item.Id">@item.Name</a>
 		<div class="dropdown-divider"></div>
 	}
-	
-	
-	
-
 </div>
+
+

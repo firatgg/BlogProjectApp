@@ -113,11 +113,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<a class="dropdown-item" href="#"></a>
-								<a class="dropdown-item" href="blog1.html">Standard Blog</a>
+								<a class="dropdown-item" href="~/themes/blog1.html">Standard Blog</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="blog2.html">2 Column Blog</a>
+								<a class="dropdown-item" href="~/themes/blog2.html">2 Column Blog</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="blog3.html">3 Column Blog</a>
+								<a class="dropdown-item" href="~/themes/blog3.html">3 Column Blog</a>
 
 							</div>
 						</li>
@@ -130,21 +130,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<input class="form-control mr-sm-2" type="search" placeholder="Search here..." name="Search" required="">
 						<button class="btn btn1 my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
 					</form>
-
-
-
 				</div>
 			</nav>
-
 		</div>
 	</header>
-
+	<!--//header-->
 	<div class="container-fluid">
 		<main role="main" class="pb-3">
 			@RenderBody()
 		</main>
 	</div>
-	
+
+	<!--footer-->
 	<footer>
 		<div class="container">
 			<div class="row">
@@ -168,7 +165,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="col-md-7 blog-grid-right">
 
 								<h5>
-									<a href="single.html">Pellentesque dui, non felis. Maecenas male non felis </a>
+									<a href="~/themes/single.html">Pellentesque dui, non felis. Maecenas male non felis </a>
 								</h5>
 								<div class="sub-meta">
 									<span>
@@ -180,14 +177,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="blog-grids row mb-3">
 							<div class="col-md-5 blog-grid-left">
-								<a href="single.html">
-									<img src="~/themes/images/5.jpg" class="img-fluid" alt="">
+								<a href="~/themes/single.html">
+									<img src="images/5.jpg" class="img-fluid" alt="">
 								</a>
 							</div>
 							<div class="col-md-7 blog-grid-right">
 
 								<h5>
-									<a href="single.html">Pellentesque dui, non felis. Maecenas male non felis </a>
+									<a href="~/themes/single.html">Pellentesque dui, non felis. Maecenas male non felis </a>
 								</h5>
 								<div class="sub-meta">
 									<span>
@@ -199,14 +196,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="blog-grids row mb-3">
 							<div class="col-md-5 blog-grid-left">
-								<a href="single.html">
-									<img src="~/themes/images/6.jpg" class="img-fluid" alt="">
+								<a href="~/themes/single.html">
+									<img src="images/6.jpg" class="img-fluid" alt="">
 								</a>
 							</div>
 							<div class="col-md-7 blog-grid-right">
 
 								<h5>
-									<a href="single.html">Pellentesque dui, non felis. Maecenas male non felis </a>
+									<a href="~/themes/single.html">Pellentesque dui, non felis. Maecenas male non felis </a>
 								</h5>
 								<div class="sub-meta">
 									<span>
@@ -371,12 +368,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<script>
 		$(document).ready(function () {
 
-									var defaults = {
-										containerID: 'toTop', // fading element id
-										containerHoverID: 'toTopHover', // fading element hover id
-										scrollSpeed: 1200,
-										easingType: 'linear'
-									};
+			var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear'
+			};
 
 
 			$().UItoTop({

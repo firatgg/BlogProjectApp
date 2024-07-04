@@ -7,8 +7,13 @@ using System.Threading.Tasks;
 
 namespace BlogProjectApp.Entity.Services
 {
-	public interface ICategoryService
+	public interface IAccountService
 	{
-		Task<List<CategoryViewModel>> GetAll();
+		Task<string> CreateUserAsync(RegisterViewModel model);
+		Task<string> FindByNameAsync(LoginViewModel model);
+
+		Task<UserViewModel> Find(string username);
+
+
 	}
 }

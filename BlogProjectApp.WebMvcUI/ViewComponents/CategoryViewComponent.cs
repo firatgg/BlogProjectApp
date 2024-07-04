@@ -3,10 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlogProjectApp.WebMvcUI.ViewComponents
 {
-	public class CategoryViewComponent:ViewComponent
+	public class CategoryViewComponent : ViewComponent
 	{
 		private readonly ICategoryService _categoryService;
-
 		public CategoryViewComponent(ICategoryService categoryService)
 		{
 			_categoryService = categoryService;

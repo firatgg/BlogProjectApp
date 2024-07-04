@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace BlogProjectApp.Entity.Services
 {
-	public interface ICategoryService
+	public interface ICommentService
 	{
-		Task<List<CategoryViewModel>> GetAll();
+		Task<List<CommentViewModel>> GetAllByArticleId(int id);
+		Task Add(CommentViewModel model);
 	}
 }

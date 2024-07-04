@@ -56,9 +56,12 @@ namespace BlogProjectApp.Service.Extensions
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IArticleService,ArticleService>();
             services.AddScoped<ICategoryService,CategoryService>();
+            services.AddScoped<ICommentService,CommentService>();
+			services.AddScoped(typeof(IAccountService), typeof(AccountService));
 
 
-            services.AddAutoMapper(typeof(MappingProfile));
+
+			services.AddAutoMapper(typeof(MappingProfile));
         }
     }
 }

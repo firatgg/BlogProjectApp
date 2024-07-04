@@ -24,7 +24,7 @@ namespace BlogProjectApp.Service.Services
 
 		public async Task<IEnumerable<ArticleViewModel>> GetAll()
 		{
-			//_uow.GetRepository<Article>(); =>Reoısitory<Artşcle> a karşılık gelir
+			//_uow.GetRepository<Article>(); =>Repository<Article> a karşılık gelir
 			var list = await _uow.GetRepository<Article>().GetAllAsync();
 			return _mapper.Map<List<ArticleViewModel>>(list);
 		}
@@ -34,9 +34,10 @@ namespace BlogProjectApp.Service.Services
 			throw new NotImplementedException();
 		}
 
-		public Task<ArticleViewModel> Get(int id)
+		public async Task<ArticleViewModel> Get(int id)
 		{
-			throw new NotImplementedException();
+			var article = await _uow.GetRepository<Article>().GetByIdAsync(id);
+			return _mapper.Map<ArticleViewModel>(article);
 		}
 
 		

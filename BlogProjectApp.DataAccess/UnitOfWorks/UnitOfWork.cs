@@ -25,15 +25,15 @@ namespace BlogProjectApp.DataAccess.UnitOfWorks
 			return new Repository<T>(_context);
 		}
 
-		public void Commit()
+		public void Commit()	
 		{
 			_context.SaveChanges();
 		}
 
 		public async Task CommitAsync()
 		{
-			await _context.SaveChangesAsync();
-		}
+            await _context.SaveChangesAsync();
+        }
 
 		public void Dispose(bool disposing)
 		{
@@ -46,10 +46,10 @@ namespace BlogProjectApp.DataAccess.UnitOfWorks
 			}
 			this.disposed = true;
 		}
-		public virtual void Dispose()
+		public void Dispose()
 		{
 			Dispose(true);
-			GC.SuppressFinalize(this);
+			GC.SuppressFinalize(this); //GC - Garbage Collector
 		}
 		
 	}

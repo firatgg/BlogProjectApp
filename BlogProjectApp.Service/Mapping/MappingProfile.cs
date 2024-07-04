@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using BlogProjectApp.DataAccess.Identity;
 using BlogProjectApp.Entity.Entities;
 using BlogProjectApp.Entity.ViewModels;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,13 @@ namespace BlogProjectApp.Service.Mapping
         {
             CreateMap<Article,ArticleViewModel>().ReverseMap();
             CreateMap<Category,CategoryViewModel>().ReverseMap();
-        }
-    }
+			CreateMap<Comment, CommentViewModel>().ReverseMap();
+			CreateMap<AppUser, UserViewModel>().ReverseMap();
+			CreateMap<AppUser, LoginViewModel>().ReverseMap();
+
+
+
+
+		}
+	}
 }

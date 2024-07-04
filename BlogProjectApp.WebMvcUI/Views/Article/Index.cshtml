@@ -1,28 +1,25 @@
-﻿
-
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout-Blog.cshtml";
+﻿@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout-Blog.cshtml";
 }
 @model List<ArticleViewModel>
 <section class="main-content-w3layouts-agileits">
 	<div class="container">
 		<h3 class="tittle">Blog Posts</h3>
 		<div class="inner-sec">
-			
 			<div class="left-blog-info-w3layouts-agileits text-left">
 				<div class="row">
 					@foreach (var item in Model)
 					{
 						<div class="col-lg-4 card">
-							<a asp-action="Detail" asp-controller="Article" asp-route-id="@item.Id">
+							<a asp-action="Details" asp-controller="Article" asp-route-id="@item.Id">
 								<img src="@item.PictureUrl" class="card-img-top img-fluid" alt="@item.Title" title="@item.Title">
 							</a>
 							<div class="card-body">
 								<ul class="blog-icons my-4">
 									<li>
 										<a href="#">
-											<i class="far fa-calendar-alt"></i> @item.CreatedDate.ToString("dd-MMMM-yyyy");
+											<i class="far fa-calendar-alt"></i> @item.CreatedDate.ToString("dd-MMMM-yyyy")
 										</a>
 									</li>
 									<li class="mx-2">
@@ -38,18 +35,15 @@
 
 								</ul>
 								<h5 class="card-title">
-									<a asp-action="Detail" asp-controller="Article" asp-route-id="@item.Id">@item.Title
-								</a>
+									<a asp-action="Details" asp-controller="Article" asp-route-id="@item.Id">@item.Title</a>
 								</h5>
-								<p class="card-text mb-3">@item.Summary </p>
-								<a asp-action="Detail" asp-controller="Article" asp-route-id="@item.Id" class="btn btn-primary read-m">
-									Devamı..
-								</a>
+								<p class="card-text mb-3">@item.Summary</p>
+								<a asp-action="Details" asp-controller="Article" asp-route-id="@item.Id" class="btn btn-primary read-m">Devamı...</a>
 							</div>
 						</div>
 					}
+
 				</div>
-				
 			</div>
 		</div>
 	</div>

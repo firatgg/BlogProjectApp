@@ -16,15 +16,15 @@ namespace BlogProjectApp.DataAccess.Repositories
 		private DbSet<T> _dbSet;
 		public Repository(BlogDbContext context)
 		{
-			_context = context;
-			_dbSet = _context.Set<T>();
+			_context = context;		//arakatman - veritabanı
+			_dbSet = _context.Set<T>();	//dbset-tablo
 		}
 
 
 		public async Task Add(T entity)
 		{
 			await _dbSet.AddAsync(entity);
-			//_context.SaveChangesAsync();
+			//_context.SaveChangesAsync();	//UnitOfWork tarafından yapılacak.
 		}
 
 		public void Update(T entity)
@@ -64,7 +64,7 @@ namespace BlogProjectApp.DataAccess.Repositories
 			IQueryable<T> query = _dbSet;
 			if (filter!=null)
 			{
-				_dbSet.Where(filter);
+				query = _dbSet.Where(filter);
 			}
 			return await query.FirstOrDefaultAsync();
 		}
@@ -75,6 +75,18 @@ namespace BlogProjectApp.DataAccess.Repositories
 
 		}
 
-		
+        public async Task<IEnumerable<T>> GetAll(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null, params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> query = _dbSet;
+            if (filter != null)
+                query = query.Where(filter);
+            if (orderby != null)
+                query = orderby(query);
+            foreach (var table in includes)
+            {
+                query = query.Include(table);
+            }
+            return await query.ToListAsync();
+        }
 	}
 }

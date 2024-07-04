@@ -20,8 +20,7 @@ namespace BlogProjectApp.Service.Services
 			_uow = uow;
 			_mapper = mapper;
 		}
-
-		public async Task<IEnumerable<CategoryViewModel>> GetAll()
+		public async Task<List<CategoryViewModel>> GetAll()
 		{
 			var list = await _uow.GetRepository<Category>().GetAllAsync();
 			return _mapper.Map<List<CategoryViewModel>>(list);
