@@ -28,10 +28,11 @@ namespace BlogProjectApp.Service.Services
 			var list = await _uow.GetRepository<Article>().GetAllAsync();
 			return _mapper.Map<List<ArticleViewModel>>(list);
 		}
-
-		public Task Add(ArticleViewModel model)
+		
+		public async Task Add(ArticleViewModel model)
 		{
-			throw new NotImplementedException();
+			await _uow.GetRepository<Article>().Add(_mapper.Map<Article>(model));	
+			await _uow.CommitAsync(); //SaveChanges();
 		}
 
 		public async Task<ArticleViewModel> Get(int id)

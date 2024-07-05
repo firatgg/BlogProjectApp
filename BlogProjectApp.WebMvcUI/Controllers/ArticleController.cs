@@ -2,6 +2,7 @@
 using BlogProjectApp.Entity.Services;
 using BlogProjectApp.Entity.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using NuGet.Protocol.Core.Types;
 
 namespace BlogProjectApp.WebMvcUI.Controllers
@@ -11,15 +12,16 @@ namespace BlogProjectApp.WebMvcUI.Controllers
 		private readonly IArticleService _articleService;
 		private readonly ICommentService _commentService;
 		private readonly IAccountService _accountService;
+		private readonly ICategoryService _categoryService;
+        public ArticleController(IArticleService articleService, ICommentService commentService, IAccountService accountService, ICategoryService categoryService)
+        {
+            _articleService = articleService;
+            _commentService = commentService;
+            _accountService = accountService;
+            _categoryService = categoryService;
+        }
 
-		public ArticleController(IArticleService articleService, ICommentService commentService, IAccountService accountService)
-		{
-			_articleService = articleService;
-			_commentService = commentService;
-			_accountService = accountService;
-		}
-
-		public async Task<IActionResult> Index(int? id, string? search)
+        public async Task<IActionResult> Index(int? id, string? search)
 		{
 			var list=await _articleService.GetAll();
 
@@ -42,7 +44,28 @@ namespace BlogProjectApp.WebMvcUI.Controllers
 			var model = await _articleService.Get(id);
 			return View(model);
 		}
-		public async Task<IActionResult> CreateComment(string message, int id)
+
+		public async Task <IActionResult> Create()
+
+		{
+			var categories =  await _categoryService.GetAll();
+			ViewBag.Categories = new SelectList(categories, "Id", "Name");
+			return View();
+		}
+		[HttpPost]
+        public async Task<IActionResult> Create(ArticleViewModel model, IFormFile formFile)
+        {
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", formFile.FileName);
+            var stream = new FileStream(path, FileMode.Create);
+            formFile.CopyTo(stream);
+            model.PictureUrl = "/images/" + formFile.FileName;
+            var user = _accountService.Find(User.Identity.Name);
+            model.UserId = user.Id;
+            await _articleService.Add(model);
+            return RedirectToAction("Index");
+
+        }
+        public async Task<IActionResult> CreateComment(string message, int id)
 		{
 			var user = await _accountService.Find(User.Identity.Name);
 			CommentViewModel model = new()

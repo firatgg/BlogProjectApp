@@ -67,11 +67,11 @@ namespace BlogProjectApp.WebMvcUI.Controllers
             return View(model);
         }
 
-        //public async Task<IActionResult> Logout()
-        //{
-        //    await _signInManager.SignOutAsync();
+        public async Task<IActionResult> Logout()
+        {
+            await _service.SignOutAsync();
 
-        //    return RedirectToAction("Index", "Home");
-        //}
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
