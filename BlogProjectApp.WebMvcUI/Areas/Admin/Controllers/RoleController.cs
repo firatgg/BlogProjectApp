@@ -41,5 +41,23 @@ namespace BlogProjectApp.WebMvcUI.Areas.Admin.Controllers
 
             return View(model);
         }
+
+        public async Task<IActionResult> Edit(string id ) 
+        {
+            var model = await _accountService.GetAllUsersWithRole(id); //Servis katmanından geriye UsersInOrOutViewModel dönüyor.
+            return View(model); 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult >Edit(EditRoleViewModel model) 
+        {
+            string msg = await _accountService.EditRoleListAsync(model);
+            if (msg == "OK") 
+            {
+                ModelState.AddModelError("", msg);
+                return View(model);
+            }
+            return RedirectToAction("Edit", "Role" , new {id=model.RoleId, area="Admin"});
+        }
     }
 }

@@ -4,6 +4,7 @@ using BlogProjectApp.Entity.Services;
 using BlogProjectApp.Entity.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,7 @@ namespace BlogProjectApp.Service.Services
             AppRole role = new AppRole()
             {
                 Name = model.Name,
-                Description = model.Description,             
+                Description = model.Description             
             };
             var identityResult = await _roleManager.CreateAsync(role);
 
@@ -112,5 +113,80 @@ namespace BlogProjectApp.Service.Services
 		{
 			await _signInManager.SignOutAsync();
 		}
-	}
+
+		public async Task<List<UserViewModel>> GetAllUsers()
+		{
+			var users = await _userManager.Users.ToListAsync();
+            return _mapper.Map<List<UserViewModel>>(users);  
+		}
+
+		public async Task<UsersInOrOutViewModel> GetAllUsersWithRole(string id)
+		{
+			var role =  await FindRoleByIdAsync(id);
+            
+            var usersInRole = new List<AppUser>();
+			var usersOutRole = new List<AppUser>();
+
+            var users = await _userManager.Users.ToListAsync();
+            foreach(var user in users)
+            {
+                if (await _userManager.IsInRoleAsync(user, role.Name))
+                {
+                    usersInRole.Add(user); //Bu rolde bulunan kullanıcların listesi
+                }
+                else 
+                {
+					usersOutRole.Add(user); //Bu rolde olmayan kullanıcların listesi
+				}
+            }
+			UsersInOrOutViewModel model = new UsersInOrOutViewModel()
+            {
+                Role = role,
+                UsersInRole = _mapper.Map<List<UserViewModel>>(usersInRole),
+				UsersOutRole = _mapper.Map<List<UserViewModel>>(usersOutRole),
+
+			};
+            return model;
+		}
+
+		public async Task<RoleViewModel> FindRoleByIdAsync(string id)
+		{
+            var role = await _roleManager.FindByIdAsync(id);
+            return _mapper.Map<RoleViewModel>(role);
+		}
+
+        public async Task<string> EditRoleListAsync(EditRoleViewModel model)
+        {
+            string msg = "Ok";
+
+            foreach (var userId in model.UsersIdsToAdd ?? new string[] {}) 
+            {
+                var user = await _userManager.FindByIdAsync(userId);
+                if (user != null) 
+                {
+                    var result = await _userManager.AddToRoleAsync(user, model.RoleName);
+                    if (!result.Succeeded) 
+                    {
+                        msg = $"{user.UserName} role eklenemedi.";
+                    }
+                }
+                
+            }
+            foreach (var userId in model.UsersIdsToDelete ?? new string[] { })
+            {
+                var user = await _userManager.FindByIdAsync(userId);
+                if (userId != null)
+                {
+                    var result = await _userManager.RemoveFromRoleAsync(user, model.RoleName);
+
+                    if (!result.Succeeded)
+                    {
+                        msg = $"{user.UserName} rolden çıkarılamadı";
+                    }
+                }
+
+            }
+            return msg;
+        }
+    }
 }
